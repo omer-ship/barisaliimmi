@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bir Şey Söylemem Lazım</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .heart {
+      font-size: 40px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    img {
+      max-width: 90%;
+      border-radius: 20px;
+      margin: 10px 0;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<section>
+  <h1>Bir şey söylemem lazım...</h1>
+  <div class="heart">🤍</div>
+  <p>Aşağı kaydır</p>
+</section>
+
+<section class="fade-in">
+  <h2>İlk sarılma anımız</h2>
+  <img src="foto1.jpg" alt="">
+  <p>Utana utana sarıldığımız ilk an 🤍</p>
+</section>
+
+<section class="fade-in">
+  <h2>Sımsıkı sarıldığımız an</h2>
+  <img src="foto2.jpg" alt="">
+  <p>Sımsıkı sarıldığımız… boynundan öptüğüm, bırakmak istemediğim o an 🤍</p>
+</section>
+
+<section class="fade-in">
+  <h2>Bir şey söylemek istiyorum...</h2>
+  <p>Seni kırdım, farkındayım...</p>
+  <p>Gerçekten üzgünüm.</p>
+  <p>Bana bir şans daha verir misin?</p>
+</section>
+
+<section class="fade-in">
+  <h2>Biz 🤍</h2>
+  <img src="foto3.jpg">
+  <img src="foto4.jpg">
+</section>
+
+<script>
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = {
+    threshold: 0.3
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+</script>
+
+</body>
+</html>
